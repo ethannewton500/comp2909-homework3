@@ -1,10 +1,15 @@
-<div>
-  <ul>
-    @for( post of data; track post.id){
-      <li>
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.body }}</p>
-      </li>
-    }
-  </ul>
-</div>
+<h1>Genres</h1>
+<ul> 
+  @for(genre of _genreArray.genres; track genre.id){
+    <li>{{genre.id}}</li>
+    <li>{{genre.name}}</li>
+  }
+</ul>
+<h2>Movies</h2>
+<ul>
+  @for(movie of _movieArray.results; track movie.id){
+    <li>{{movie.id}}</li>
+    <li>{{movie.title}}</li>
+    <li>{{movie.genre}}</li>
+  }
+</ul>
