@@ -1,4 +1,13 @@
 <h1>Genres</h1>
+  <select #t (change)="changeGenre(t.value)">
+    @for(genre of _genreArray.genres; track genre.id){
+      <option value="{{genre.id}}">{{genre.name}}</option>
+    }
+  </select>
+  <br>
+  <button (click)="decreasePageNumber()">-</button>
+  <p>Page Number: {{pageNumber}} / 3</p>
+  <button (click)="increasePageNumber()">+</button>
 <ul> 
   @for(genre of _genreArray.genres; track genre.id){
     <li>{{genre.id}}</li>
@@ -10,6 +19,7 @@
   @for(movie of _movieArray.results; track movie.id){
     <li>{{movie.id}}</li>
     <li>{{movie.title}}</li>
-    <li>{{movie.genre}}</li>
+    <li>{{movie.genre_ids}}</li>
+    <li>{{movie.overview}}</li>
   }
 </ul>
