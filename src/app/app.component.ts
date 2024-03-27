@@ -42,20 +42,18 @@ export class AppComponent implements OnInit{
     let today = new Date();
     let thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate( thirtyDaysAgo.getDate() - 30 );
-    return thirtyDaysAgo.getFullYear() + '-' + thirtyDaysAgo.getMonth() + '-' + thirtyDaysAgo.getDate();
+    return thirtyDaysAgo.getFullYear() + '-' + (thirtyDaysAgo.getMonth() + 1) + '-' + thirtyDaysAgo.getDate();
   }
 
   getEndDate() {
     let today = new Date();
-    return today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate();
+    return today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
   }
 
   increasePageNumber() {
-    if (this.pageNumber < 3) {
+    if (this.pageNumber < this._movieArray.total_pages) {
       this.pageNumber++;
       this.currentBaseURL = this.constructBaseURL(this.getStartDate(), this.getEndDate(), this.pageNumber, this.genreNumber);
-      console.log('Current Base URL: ' + this.currentBaseURL)
-      console.log('Page Number: ' + this.pageNumber)
       this.getMovies();
     }
   }
@@ -64,8 +62,6 @@ export class AppComponent implements OnInit{
   if (this.pageNumber > 1) {
     this.pageNumber--;
     this.currentBaseURL = this.constructBaseURL(this.getStartDate(), this.getEndDate(), this.pageNumber, this.genreNumber);
-    console.log('Current Base URL: ' + this.currentBaseURL)
-    console.log('Page Number: ' + this.pageNumber)
     this.getMovies();
     }
   }
@@ -73,9 +69,8 @@ export class AppComponent implements OnInit{
   changeGenre(genreNumber: String) {
     console.log('Genre Number: ' + genreNumber)
     this.genreNumber = Number(genreNumber);
+    this.pageNumber = 1;
     this.currentBaseURL = this.constructBaseURL(this.getStartDate(), this.getEndDate(), this.pageNumber, this.genreNumber);
-    console.log('Current Base URL: ' + this.currentBaseURL)
-    console.log('Genre Number: ' + this.genreNumber)
     this.getMovies();
   }
 
@@ -91,19 +86,9 @@ getMovies() {
   });
 }
 
-fetchData() {
-  this.httpClient.get('https://jsonplaceholder.typicode.com/posts').subscribe((data) => {
-    console.log(data);
-    this.data = data;
-  });
-}
-
 getGenres() {
   this.httpClient.get<any[]>(GENRE_URL).subscribe(data => {
     this._genreArray = data;
-    console.log(this._genreArray);
-    console.log('test')
-    console.log(this._genreArray.genres);
   });
 }
 

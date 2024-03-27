@@ -1,18 +1,35 @@
-  <select #genre (change)="changeGenre(genre.value)">
-    @for(genre of _genreArray.genres; track genre.id){
-      <option value="{{genre.id}}">{{genre.name}}</option>
-    }
-  </select>
-  <br>
-  <button (click)="decreasePageNumber()">-</button>
-  <p>Page Number: {{pageNumber}} / 3</p>
-  <button (click)="increasePageNumber()">+</button>
-<h2>Movies</h2>
-<ul>
+<div class="directoryControls">
+  <a>Home</a>
+  <p>|</p>
+  <a>About</a>
+</div>
+
+<div class="pageControls">
+  <div>
+    <select #genre (change)="changeGenre(genre.value)">
+      @for(genre of _genreArray.genres; track genre.id){
+        <option value="{{genre.id}}">{{genre.name}}</option>
+      }
+    </select>
+  </div>
+  
+  <div>
+    <button (click)="decreasePageNumber()">-</button>
+    <p>Page Number: {{pageNumber}} / {{_movieArray.total_pages}}</p>
+    <button (click)="increasePageNumber()">+</button>
+  </div>
+</div>
+
+
+<div class="movieCardContainer">
   @for(movie of _movieArray.results; track movie.id){
-    <li>{{movie.id}}</li>
-    <li>{{movie.title}}</li>
-    <li>{{movie.genre_ids}}</li>
-    <li>{{movie.overview}}</li>
+    <div class="movieCard">
+      <div class="imageContainer">
+        <img alt="image for {{movie.title}}" [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w300' + movie.poster_path : 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Fpicture-sharing-sites%2F32%2FNo_Image-1024.png&f=1&nofb=1&ipt=538194d62a666d9818147fade0dcbe79cf1394cc4799e73f151ece1342da100b&ipo=images'" [class.no-image]="!movie.poster_path" [class.image]="movie.poster_path"/>
+      </div>
+      <h3>{{movie.title}}</h3>
+      <a href="https://www.themoviedb.org/movie/{{movie.id}}-{{movie.title.toLowerCase()}}">More Info</a>
+      <p>{{movie.overview}}</p>
+    </div>
   }
-</ul>
+</div>
