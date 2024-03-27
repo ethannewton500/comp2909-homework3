@@ -1,0 +1,27 @@
+<div class="pageControls">
+  <div>
+    <select #genre (change)="changeGenre(genre.value)">
+      @for(genre of _genreArray.genres; track genre.id){
+        <option value="{{genre.id}}">{{genre.name}}</option>
+      }
+    </select>
+  </div>
+  
+  <div>
+    <button (click)="decreasePageNumber()">-</button>
+    <p>Page Number: {{pageNumber}} / {{_movieArray.total_pages}}</p>
+    <button (click)="increasePageNumber()">+</button>
+  </div>
+</div>
+
+
+<div class="movieCardContainer">
+  @for(movie of _movieArray.results; track movie.id){
+    <div class="movieCard">
+      <app-movie-image [posterPath]="movie.poster_path" [title]="movie.title" [hasImage]="!!movie.poster_path"></app-movie-image>
+      <h3>{{movie.title}}</h3>
+      <a href="https://www.themoviedb.org/movie/{{movie.id}}-{{movie.title.toLowerCase()}}">More Info</a>
+      <p>{{movie.overview}}</p>
+    </div>
+  }
+</div>
