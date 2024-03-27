@@ -1,9 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { inject } from '@angular/core';
-import { OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { DataComponent } from './data/data.component';
 import { AboutComponent } from './about/about.component';
