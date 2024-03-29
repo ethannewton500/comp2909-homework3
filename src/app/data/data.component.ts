@@ -33,7 +33,6 @@ export class DataComponent implements OnInit{
 
   
   constructBaseURL(startDate: string, endDate: string, pageNumber: number, genreNumber: number) {
-    console.log('Original Base URL: ' + BASE_URL + '&primary_release_date.gte=' + startDate + '&primary_release_date.lte=' + endDate + '&page=' + pageNumber + '&with_genres=' + genreNumber)
     return BASE_URL + '&primary_release_date.gte=' + startDate + '&primary_release_date.lte=' + endDate + '&page=' + pageNumber + '&with_genres=' + genreNumber;
   }
 
@@ -66,7 +65,6 @@ export class DataComponent implements OnInit{
   }
 
   changeGenre(genreNumber: String) {
-    console.log('Genre Number: ' + genreNumber)
     this.genreNumber = Number(genreNumber);
     this.pageNumber = 1;
     this.currentBaseURL = this.constructBaseURL(this.getStartDate(), this.getEndDate(), this.pageNumber, this.genreNumber);
@@ -81,7 +79,6 @@ export class DataComponent implements OnInit{
 getMovies() {
   this.httpClient.get<any[]>(this.currentBaseURL).subscribe(data => {
     this._movieArray = data;
-    console.log(this._movieArray);
   });
 }
 
